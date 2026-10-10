@@ -1,0 +1,184 @@
+```gitignore
+# ==========================================
+# MediCore SaaS - Root .gitignore
+# Backend: .NET 10 / ASP.NET Core / EF Core
+# Frontend: Next.js / React / TypeScript
+# IDE: Visual Studio / VS Code
+# ==========================================
+
+# ------------------------------------------
+# Operating System
+# ------------------------------------------
+.DS_Store
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# ------------------------------------------
+# IDEs and Editors
+# ------------------------------------------
+
+# Visual Studio
+.vs/
+**/.vs/
+*.vsidx
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.vspscc
+*.vssscc
+*.sdf
+*.opensdf
+*.VC.db
+*.VC.VC.opendb
+
+# Rider / IntelliJ
+.idea/
+*.sln.iml
+
+# VS Code
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+!.vscode/launch.json
+!.vscode/tasks.json
+
+# ------------------------------------------
+# .NET / ASP.NET Core
+# ------------------------------------------
+[Bb]in/
+[Oo]bj/
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Aa]rm/
+[Aa]rm64/
+artifacts/
+TestResults/
+BenchmarkDotNet.Artifacts/
+
+# Build and generated files
+*.dll
+*.exe
+*.pdb
+*.cache
+*.tmp
+*.log
+*.coverage
+*.coveragexml
+
+# NuGet
+*.nupkg
+*.snupkg
+packages/
+.nuget/
+
+# ASP.NET Core local files
+appsettings.Local.json
+appsettings.*.Local.json
+secrets.json
+
+# User-specific launch settings
+# Keep launchSettings.json tracked unless it contains secrets.
+# Api/Properties/launchSettings.json
+
+# ------------------------------------------
+# EF Core
+# ------------------------------------------
+# Keep EF Core migrations tracked!
+# Do NOT ignore Migrations/ folders.
+# Do NOT ignore *.Designer.cs or *ModelSnapshot.cs.
+
+# ------------------------------------------
+# Node.js / npm / Next.js / React
+# ------------------------------------------
+
+# Dependencies
+node_modules/
+
+# Next.js
+.next/
+out/
+next-env.d.ts
+
+# Production build
+dist/
+build/
+
+# Testing / coverage
+coverage/
+.nyc_output/
+playwright-report/
+test-results/
+
+# Package manager and bundler caches
+.npm/
+.pnpm-store/
+.turbo/
+.parcel-cache/
+.vite/
+*.tsbuildinfo
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+!.env.sample
+!.env.template
+
+# Next.js deployment
+.vercel/
+.netlify/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# ------------------------------------------
+# Environment and secrets
+# ------------------------------------------
+
+# Certificates and private keys
+*.pfx
+*.p12
+*.key
+*.pem
+*.crt
+*.cer
+
+# Keep explicitly public certificates/configuration
+# only if they contain no private key material.
+
+# Local database files
+*.mdf
+*.ldf
+*.sqlite
+*.sqlite3
+*.db
+
+# ------------------------------------------
+# Docker
+# ------------------------------------------
+# Do not ignore Dockerfile or docker-compose.yml.
+# Ignore local overrides that may contain credentials.
+docker-compose.override.yml
+compose.override.yaml
+docker-compose.local.yml
+compose.local.yaml
+
+# ------------------------------------------
+# Temporary files
+# ------------------------------------------
+*.bak
+*.old
+*.orig
+*.swp
+*.swo
+*~
+*.temp
+*.temp.*
+```
