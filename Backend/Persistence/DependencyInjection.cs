@@ -1,4 +1,5 @@
 ﻿
+using Application.Abstractions.Identity;
 using Application.Abstractions.Persistence;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -33,6 +34,8 @@ public static class DependencyInjection
             .AddIdentity<ApplicationUser, IdentityRole<Guid>>()
             .AddEntityFrameworkStores<MediCoreDbContext>()
             .AddDefaultTokenProviders();
+
+        services.AddScoped<IIdentityService, IdentityService>();
 
         return services;
     }
