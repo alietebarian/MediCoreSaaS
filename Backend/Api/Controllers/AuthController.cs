@@ -59,31 +59,26 @@ public sealed class AuthController : ControllerBase
         [FromBody] LoginCommand command,
         CancellationToken cancellationToken)
     {
-        var validationResult =
-            await _LoginValidator.ValidateAsync(command, cancellationToken);
+        var validator = new LoginCommandValidator();
+
+        var validationResult = await validator.ValidateAsync(command, cancellationToken);
 
         if (!validationResult.IsValid)
         {
-            return BadRequest(validationResult.Errors.Select(error => new
-            {
-                error.PropertyName,
-                error.ErrorMessage
-            }));
+            return BadRequest(validationResult.Errors.Select(
+                error => error.ErrorMessage));
         }
 
-        var isValid = await _sender.Send(command, cancellationToken);
+        var result = await _sender.Send(command, cancellationToken);
 
-        if (!isValid)
+        if (result is null)
         {
             return Unauthorized(new
             {
-                Message = "Invalid email or password."
+                message = "Invalid email or password."
             });
         }
 
-        return Ok(new
-        {
-            Message = "Credentials are valid."
-        });
+        return Ok(result);
     }
 }

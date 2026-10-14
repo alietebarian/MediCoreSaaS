@@ -4,5 +4,4 @@ namespace Application.Identity.Login;
 
 public sealed record LoginCommand(
     string Email,
-    string Password
-) : IRequest<bool>;
+    string Password) : IRequest<LoginResponse?>;

@@ -40,15 +40,43 @@ public sealed class IdentityService : IIdentityService
                 $"User registration failed: {errors}");
         }
 
+        var roleResult = await _userManager.AddToRoleAsync(
+        user,
+        "Patient");
+
+        if (!roleResult.Succeeded)
+        {
+            await _userManager.DeleteAsync(user);
+
+            throw new InvalidOperationException(
+                string.Join(
+                    "; ",
+                    roleResult.Errors.Select(error => error.Description)));
+        }
+
         return user.Id.ToString();
     }
 
-    public async Task<bool> ValidateCredentialsAsync(string email, string password, CancellationToken cancellationToken = default)
+    public async Task<AuthenticatedUser?> ValidateCredentialsAsync(string email, string password, CancellationToken cancellationToken = default)
     {
         var user = await _userManager.FindByEmailAsync(email);
 
-        if (user is null) return false;
+        if (user is null) return null;
 
-        return await _userManager.CheckPasswordAsync(user, password);
+        var passwordIsValid = await _userManager.CheckPasswordAsync(user, password);
+
+        if (!passwordIsValid)
+        {
+            return null;
+        }
+
+        var roles = await _userManager.GetRolesAsync(user);
+
+        return new AuthenticatedUser(
+            user.Id,
+            user.Email ?? string.Empty,
+            user.FullName,
+            roles.ToArray()
+        );
     }
 }
